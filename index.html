@@ -1,0 +1,520 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ebook do Bev</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: o ebook como o painel interno do Bev — fundo cinza claro, capítulos em cards brancos arredondados, capa escura com degradê verde-oliva e destaque em verde-limão */
+:root{
+  --bg:#F3F3F1; --black:#111311; --on-black:#FFFFFF; --on-black-muted:#B9BDB5; --card:#FFFFFF; --soft:#F6F7F3; --ink:#161816; --muted:#5F635C;
+  --line:#E2E6D6; --lime:#A9CF44; --lime-soft:#F0F7DB; --green:#4A6614;
+  --hero-a:#121412; --hero-b:#2E3A1F; --on-hero:#FFFFFF; --on-hero-muted:#C9CEC4;
+  --warn:#C9971F; --warn-soft:#FFF5DC;
+  --sans:"Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  --radius:18px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0}
+.book{max-width:820px;margin:0 auto;padding-block:32px 72px;display:grid;gap:24px}
+a{color:var(--green);font-weight:600}
+a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+h1,h2,h3{font-family:var(--sans);font-weight:800;text-wrap:balance;line-height:1.15;margin:0;letter-spacing:-.02em}
+p{margin:0}
+.label{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* Capa */
+.cover{background:var(--black);color:var(--on-black);border-bottom:6px solid var(--lime);border-radius:22px;padding:44px clamp(22px,5vw,48px);display:grid;gap:16px}
+.cover .label{color:var(--lime);letter-spacing:.04em;text-transform:none;font-size:15px;font-weight:500}
+.cover .logo{width:120px;height:auto;display:block}
+.cover h1{font-size:clamp(36px,7vw,58px)}
+.cover h1 em{font-style:normal;color:var(--lime)}
+.cover .sub{font-size:18px;color:var(--on-black-muted);max-width:52ch}
+.cover .meta{display:flex;flex-wrap:wrap;gap:8px;padding-top:6px}
+.cover .meta span{font-size:13px;font-weight:600;color:var(--on-black);background:rgba(255,255,255,.06);border:1px solid var(--lime);border-radius:999px;padding:6px 12px}
+
+/* Cards */
+.toc,section.ch{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,32px)}
+.toc{display:grid;gap:14px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.toc li a{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);font-weight:600}
+.toc li a::after{content:"→";color:var(--green)}
+.toc li a:hover{background:var(--soft)}
+.toc .n{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--lime);background:var(--black);border-radius:8px;padding:4px 8px}
+.toc .t{font-size:17px}
+
+section.ch{display:grid;gap:18px}
+.ch header{display:grid;gap:6px;padding-bottom:14px;border-bottom:3px solid var(--lime)}
+.ch header .label{color:var(--green)}
+.ch h2{font-size:clamp(26px,5vw,36px)}
+.ch h3{font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.ch p{max-width:68ch}
+.lede{font-size:19px;font-weight:500}
+.note{font-size:14px;color:var(--muted)}
+
+.arts{display:grid;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.art{display:grid;grid-template-columns:5em 1fr;gap:16px;padding:14px 18px;border-top:1px solid var(--line)}
+.art:first-child{border-top:0}
+.art .y{font-weight:800;color:var(--lime);background:var(--black);border-radius:8px;padding:2px 8px;justify-self:start;height:fit-content;font-variant-numeric:tabular-nums}
+.art p{min-width:0}
+
+.vals{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.val{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.val > div{display:grid;gap:4px;min-width:0}
+.val .ico{width:48px;height:48px;border-radius:14px;background:var(--lime-soft);border:1px solid #DCEBB8;display:grid;place-items:center}
+.val svg{width:22px;height:22px;fill:none;stroke:var(--green);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.val h4{margin:0;font-size:18px;font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.val p{font-size:15px;color:var(--muted);line-height:1.55}
+.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.area{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--lime);border-radius:16px;padding:20px;display:grid;gap:10px;align-content:start}
+.area h4{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em}
+.area p{font-size:15px}
+.area .sub-l{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.area ul{margin:0;padding-left:1.1em;display:grid;gap:4px;font-size:15px}
+.area ul li::marker{color:var(--lime)}
+.area .dev{background:var(--black);color:var(--on-black);border-radius:10px;padding:10px 12px;font-size:14px}
+.area .dev span{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:2px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.fig{background:var(--black);border:1px solid var(--black);border-top:4px solid var(--lime);color:var(--on-black);border-radius:16px;padding:18px;display:grid;gap:6px;align-content:start}
+.fig b{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums}
+.fig span{font-size:14px;color:var(--on-black-muted);line-height:1.4}
+
+.pull{border-left:4px solid var(--lime);background:var(--lime-soft);border-radius:0 14px 14px 0;padding:16px 20px;font-weight:800;font-size:22px;line-height:1.3;max-width:34ch}
+
+ul.list{margin:0;padding-left:1.2em;display:grid;gap:6px;max-width:68ch}
+ul.list li::marker{color:var(--lime)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.box{background:var(--soft);border-top:4px solid var(--lime)!important;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:6px;align-content:start}
+.box h4{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.box p{font-size:15px}
+
+/* Quiz */
+.quiz{display:grid;gap:12px}
+.q{display:grid;gap:12px;padding:16px 18px;border:1px solid var(--line);border-radius:14px}
+.q .qt{display:grid;grid-template-columns:2.4em 1fr;gap:10px;align-items:start}
+.q .qn{font-size:12px;font-weight:700;color:var(--lime);background:var(--black);border-radius:8px;padding:4px 0;text-align:center;font-variant-numeric:tabular-nums}
+.q .qt p{font-weight:600}
+.choices{display:flex;flex-wrap:wrap;gap:8px;padding-left:calc(2.4em + 10px)}
+.choices button{font:600 14px/1 var(--sans);padding:11px 18px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);cursor:pointer;min-width:110px}
+.choices button:hover{background:var(--soft)}
+.choices button[aria-pressed="true"]{background:var(--black);border-color:var(--black);color:var(--lime)}
+.choices button:disabled{cursor:default}
+.ans{margin-left:calc(2.4em + 10px);padding:12px 14px;font-size:15px;border-radius:10px;border:1px solid}
+.ans.ok{background:var(--lime-soft);border-color:var(--lime)}
+.ans.bad{background:var(--warn-soft);border-color:var(--warn)}
+.ans strong{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:4px}
+.ans.ok strong{color:var(--green)} .ans.bad strong{color:#8A6510}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding-top:8px}
+.bar .main{font:700 15px/1 var(--sans);padding:15px 22px;border:0;border-radius:12px;background:var(--black);color:var(--lime);cursor:pointer}
+.bar .ghost{font:700 15px/1 var(--sans);padding:14px 20px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer}
+.bar .status{font-size:15px;color:var(--muted)}
+.score{font-size:30px;font-weight:800;color:var(--green)}
+
+.sources ol{margin:0;padding-left:1.4em;display:grid;gap:6px;font-size:14px;max-width:68ch;word-break:break-word}
+.more{background:var(--black);color:var(--on-black);border-radius:var(--radius);border-bottom:6px solid var(--lime);padding:clamp(22px,4vw,36px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.more > div{display:grid;gap:6px;min-width:0}
+.more h2{font-size:clamp(24px,4.5vw,32px)}
+.more p{color:var(--on-black-muted)}
+.more .cta{background:var(--lime);color:var(--black);text-decoration:none;font-weight:700;padding:14px 20px;border-radius:12px;word-break:break-word}
+.more .cta:hover{filter:brightness(1.05)}
+.more .links{display:grid;gap:10px;min-width:0}
+.more .cta.alt{background:transparent;color:var(--lime);border:1px solid var(--lime)}
+.more .phone{color:var(--on-black);font-weight:700;font-size:18px;user-select:all;font-variant-numeric:tabular-nums}
+.more .phone span{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);font-weight:700;user-select:none}
+footer{font-size:13px;color:var(--muted);text-align:center;padding-top:8px}
+/* Abas */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:10;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px -16px rgba(17,19,17,.45);overflow:hidden}
+.tabs{position:relative;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;font:600 14px/1 var(--sans);padding:11px 14px;border:0;border-radius:10px;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button:hover{background:var(--soft);color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--black);color:var(--lime)}
+.prog{height:3px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--lime);transition:width .3s ease}
+.panel{min-width:0}
+.panel:focus{outline:none}
+#inicio{display:grid;gap:24px}
+.hint{font-size:14px;color:var(--muted)}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pager button{font:700 15px/1.2 var(--sans);padding:15px 20px;border-radius:12px;cursor:pointer}
+.pager .main{border:0;background:var(--black);color:var(--lime)}
+.pager .ghost{border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager .pos{font-size:14px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.quiz{scroll-margin-top:90px}
+@media (prefers-reduced-motion:no-preference){
+  .panel.fwd{animation:in-r .3s ease both}
+  .panel.back{animation:in-l .3s ease both}
+  @keyframes in-r{from{opacity:0;transform:translateX(28px)}}
+  @keyframes in-l{from{opacity:0;transform:translateX(-28px)}}
+}
+@media (max-width:480px){
+  body{font-size:16px}
+  .pager .pos{order:-1;width:100%;text-align:center}
+  .pager button{flex:1}
+  .art{grid-template-columns:3.8em 1fr;gap:10px;padding:12px 14px}
+  .choices{padding-left:0} .ans{margin-left:0}
+  .choices button{flex:1}
+}
+</style>
+
+<main class="book">
+
+<div class="tabbar">
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Capítulos do ebook"></nav>
+  <div class="prog" aria-hidden="true"><i id="prog"></i></div>
+</div>
+
+<div class="panel" id="inicio" data-tab="Início">
+
+<header class="cover">
+  <span class="label">Escritório Bevilaqua · FDR/UFPE</span>
+  <svg class="logo" viewBox="0 0 340 160" role="img" aria-label="Logo do Bevilaqua">
+    <g fill="none" stroke-width="22" stroke-linecap="butt">
+      <path d="M30 38 L129 121" stroke="var(--on-black)"/>
+      <path d="M170 138 A58 58 0 0 1 170 22" stroke="var(--on-black)"/>
+      <path d="M170 22 A58 58 0 0 1 170 138" stroke="var(--lime)"/>
+      <path d="M211 39 L310 122" stroke="var(--lime)"/>
+    </g>
+  </svg>
+  <h1>Conhecendo o <em>Bevilaqua</em></h1>
+  <p class="sub">Um guia sobre a primeira e única empresa júnior jurídica de Pernambuco e sobre o movimento que ela integra.</p>
+</header>
+
+<nav class="toc" aria-label="Sumário">
+  <span class="label">Sumário</span>
+  <ol>
+    <li><a href="#cap1"><span class="n">Cap. I</span><span class="t">O que é uma empresa júnior</span></a></li>
+    <li><a href="#cap4"><span class="n">Cap. II</span><span class="t">A história do Bevilaqua</span></a></li>
+    <li><a href="#valores"><span class="n">Cap. III</span><span class="t">Os nossos valores</span></a></li>
+    <li><a href="#areas"><span class="n">Cap. IV</span><span class="t">Áreas de atuação</span></a></li>
+    <li><a href="#cap5"><span class="n">Cap. V</span><span class="t">Nossos serviços</span></a></li>
+    <li><a href="#quiz"><span class="n">Cap. VI</span><span class="t">Fato ou fake do Bev</span></a></li>
+  </ol>
+  <p class="hint">Use as abas no topo, os botões no fim de cada capítulo ou deslize para o lado para passar de capítulo.</p>
+</nav>
+</div>
+
+<section class="ch panel" id="cap1" data-tab="O que é uma EJ">
+  <header><span class="label">Capítulo I</span><h2>O que é uma empresa júnior</h2></header>
+  <p class="lede">Uma empresa júnior (EJ) é uma associação civil sem fins lucrativos, formada e gerida exclusivamente por estudantes de graduação, que presta serviços reais a clientes reais com orientação de professores.</p>
+  <p>Ela funciona como um laboratório: os membros vendem projetos, negociam prazos, cuidam das finanças, recrutam e lideram pessoas. Quem toma as decisões e responde por elas é o próprio estudante.</p>
+
+  <h3>Como funciona</h3>
+  <ul class="list">
+    <li>É ligada a uma instituição de ensino superior. No caso do Bev, à Faculdade de Direito do Recife (UFPE).</li>
+    <li>Os membros são estudantes e trabalham como voluntários, sem salário.</li>
+    <li>Todo projeto tem orientação de professores ou profissionais da área.</li>
+    <li>O dinheiro dos projetos fica na empresa e é reinvestido em capacitações, estrutura, eventos e novos projetos.</li>
+    <li>As regras estão na Lei nº 13.267/2016, a Lei das Empresas Juniores.</li>
+  </ul>
+
+  <h3>EJ, estágio e grupo de estudos</h3>
+  <div class="cols">
+    <div class="box"><h4>Estágio</h4><p>Você executa tarefas definidas por outra pessoa, dentro de um escritório ou órgão que já existe.</p></div>
+    <div class="box"><h4>Grupo de estudos</h4><p>Você aprofunda a teoria e debate temas, sem cliente nem entrega.</p></div>
+    <div class="box"><h4>Empresa júnior</h4><p>Você atende clientes reais e também faz a empresa funcionar: vendas, finanças, marketing e pessoas.</p></div>
+  </div>
+
+  <h3>O Movimento Empresa Júnior</h3>
+  <p>As EJs não trabalham sozinhas. Cada uma se federa à federação do seu estado, e as federações formam a confederação nacional. Esse conjunto é o Movimento Empresa Júnior (MEJ).</p>
+  <div class="cols">
+    <div class="box"><h4>Brasil Júnior</h4><p>A confederação que representa as empresas juniores do país inteiro.</p></div>
+    <div class="box"><h4>FEJEPE</h4><p>A Federação das Empresas Juniores de Pernambuco, que reúne as EJs do estado.</p></div>
+    <div class="box"><h4>Bevilaqua</h4><p>A empresa júnior jurídica da FDR, federada à FEJEPE desde 2017.</p></div>
+  </div>
+  <div class="arts">
+    <div class="art"><span class="y">1967</span><p>Nasce na França, em Paris, a primeira empresa júnior do mundo.</p></div>
+    <div class="art"><span class="y">1988</span><p>A ideia chega ao Brasil com a empresa júnior da FGV, em São Paulo.</p></div>
+    <div class="art"><span class="y">2003</span><p>É fundada a Brasil Júnior, que passa a representar o movimento em todo o país.</p></div>
+    <div class="art"><span class="y">2016</span><p>Entra em vigor a Lei nº 13.267, que define o que é e como funciona uma empresa júnior.</p></div>
+  </div>
+</section>
+
+<section class="ch panel" id="cap4" data-tab="História">
+  <header><span class="label">Capítulo II</span><h2>A história do Bevilaqua</h2></header>
+  <p class="lede">Em dezembro de 2012, um grupo de estudantes da Faculdade de Direito do Recife, inspirado no Movimento Empresa Júnior e incomodado com a pouca vivência prática do curso, fundou o Bevilaqua – Escritório Modelo Empresarial.</p>
+  <p>O Bev é uma associação civil sem fins lucrativos vinculada como grupo de extensão à graduação em Direito da UFPE. Funciona na FDR, fundada em 1827 e uma das escolas de Direito mais antigas do país. É reconhecido como a primeira e única empresa júnior jurídica de Pernambuco.</p>
+
+  <p class="pull">“Humanizar processos e transformar pessoas.”</p>
+  <p class="note">Missão do Bevilaqua. A visão é ser referência em empreendedorismo jurídico no Brasil.</p>
+
+  <h3>Marcos</h3>
+  <div class="arts">
+    <div class="art"><span class="y">2012</span><p>Em dezembro, estudantes da FDR fundam o Bevilaqua – Escritório Modelo Empresarial. O nome homenageia Clóvis Beviláqua, ex-aluno da casa e autor do projeto do Código Civil de 1916.</p></div>
+    <div class="art"><span class="y">2017</span><p>O Bev é federado pela FEJEPE e passa a fazer parte oficialmente do Movimento Empresa Júnior.</p></div>
+    <div class="art"><span class="y">2023</span><p>Pelos dez anos, recebe homenagem em reunião solene da Câmara Municipal do Recife, a partir de requerimento do vereador Tadeu Calheiros.</p></div>
+    <div class="art"><span class="y">2025</span><p>Bate o recorde de faturamento da sua história e apresenta o primeiro case de sucesso do Bev.</p></div>
+    <div class="art"><span class="y">2026</span><p>Participa do VII Brazil Legal Symposium, na Universidade de Harvard, nos Estados Unidos. No mesmo ano, passa de 250 projetos entregues, com 45 membros ativos.</p></div>
+  </div>
+</section>
+
+<section class="ch panel" id="valores" data-tab="Valores">
+  <header><span class="label">Capítulo III</span><h2>Os nossos valores</h2></header>
+  <p class="lede">São seis valores, e cada um reconhece um jeito de ser do Bev no dia a dia.</p>
+  <div class="vals">
+    <div class="val"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><div><h4>Nosso leão não se acomoda</h4><p>Reconhece quem demonstra inconformismo, iniciativa e busca constante por evolução.</p></div></div>
+    <div class="val"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/></svg></span><div><h4>Adoramos descascar abacaxis</h4><p>Reconhece quem encara problemas, encontra soluções e não foge de desafios.</p></div></div>
+    <div class="val"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span><div><h4>Seu problema é meu problema</h4><p>Reconhece colaboração, disponibilidade e disposição para ajudar outras pessoas.</p></div></div>
+    <div class="val"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span><div><h4>Todo update é pouco</h4><p>Reconhece quem faz a informação circular no Bev: mantém o time atualizado, compartilha o que importa e não deixa ninguém por fora do que está acontecendo.</p></div></div>
+    <div class="val"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></span><div><h4>Nem mandou e eu já fiz</h4><p>Reconhece proatividade, autonomia e capacidade de antecipar necessidades.</p></div></div>
+    <div class="val"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span><div><h4>Aprendemos duas vezes</h4><p>Reconhece quem transforma experiências em aprendizado coletivo e contribui para o desenvolvimento das outras pessoas.</p></div></div>
+  </div>
+</section>
+
+<section class="ch panel" id="areas" data-tab="Áreas">
+  <header><span class="label">Capítulo IV</span><h2>Áreas de atuação</h2></header>
+  <p class="lede">O Bev é administrado pelos próprios estudantes, divididos em seis áreas. Cada uma cuida de uma parte da empresa, e todas trabalham juntas para que o cliente seja bem atendido e o membro cresça.</p>
+  <p class="note">Comercial e Marketing ficam reunidas na Diretoria de Negócios.</p>
+  <div class="areas">
+    <article class="area">
+      <h4>Comercial</h4>
+      <p>É a porta de entrada do Bev. A área comercial encontra novos clientes, faz o primeiro contato, entende o que cada empreendedor precisa e transforma essa conversa em uma proposta com escopo, prazo e valor.</p>
+      <div class="sub-l">Na prática</div>
+      <ul><li>Prospecção de clientes e parceiros</li><li>Reuniões de diagnóstico e análise gratuita</li><li>Elaboração e negociação de propostas</li><li>Acompanhamento do funil de vendas e metas de faturamento</li></ul>
+      <p class="dev"><span>Você desenvolve</span>Negociação, comunicação com cliente e visão de negócio.</p>
+    </article>
+    <article class="area">
+      <h4>Marketing</h4>
+      <p>Faz o Bev ser conhecido e lembrado. O marketing cuida de como a empresa aparece para o mundo: redes sociais, identidade visual, conteúdos jurídicos em linguagem simples e campanhas que atraem clientes e novos membros.</p>
+      <div class="sub-l">Na prática</div>
+      <ul><li>Gestão do Instagram e do LinkedIn</li><li>Criação de posts, ebooks e materiais educativos</li><li>Identidade visual e padrão da marca</li><li>Campanhas do processo seletivo e de eventos</li></ul>
+      <p class="dev"><span>Você desenvolve</span>Criatividade, escrita clara e estratégia de marca.</p>
+    </article>
+    <article class="area">
+      <h4>Projetos</h4>
+      <p>É onde o Direito acontece. A área de projetos executa os serviços vendidos, como abertura de empresa, contratos, registro de marca e adequação à LGPD, com supervisão dos professores orientadores da FDR.</p>
+      <div class="sub-l">Na prática</div>
+      <ul><li>Pesquisa e redação de contratos, pareceres e estatutos</li><li>Controle de prazos e qualidade das entregas</li><li>Contato com o cliente durante a execução</li><li>Medição da satisfação ao fim de cada projeto</li></ul>
+      <p class="dev"><span>Você desenvolve</span>Técnica jurídica, organização e responsabilidade com prazos.</p>
+    </article>
+    <article class="area">
+      <h4>Gestão</h4>
+      <p>Mantém a casa em ordem. A gestão cuida do dinheiro, dos processos internos e do planejamento, garantindo que o Bev cumpra as metas da gestão e as exigências da Brasil Júnior e da FEJEPE.</p>
+      <div class="sub-l">Na prática</div>
+      <ul><li>Finanças, caixa e prestação de contas</li><li>Planejamento estratégico e acompanhamento de metas</li><li>Organização de processos e documentos internos</li><li>Indicadores de desempenho da empresa</li></ul>
+      <p class="dev"><span>Você desenvolve</span>Visão estratégica, controle financeiro e análise de dados.</p>
+    </article>
+    <article class="area">
+      <h4>Pessoas e Cultura</h4>
+      <p>Cuida de quem faz o Bev. A área conduz o processo seletivo, acolhe os novos membros, organiza capacitações e acompanha o desenvolvimento e o bem-estar de cada pessoa, mantendo vivos os valores da empresa.</p>
+      <div class="sub-l">Na prática</div>
+      <ul><li>Processo seletivo e integração de trainees</li><li>Capacitações e trilhas de desenvolvimento</li><li>Acompanhamento de desempenho e feedbacks</li><li>Ações de clima, integração e reconhecimento dos valores</li></ul>
+      <p class="dev"><span>Você desenvolve</span>Liderança, escuta e gestão de pessoas.</p>
+    </article>
+    <article class="area">
+      <h4>Institucional</h4>
+      <p>Representa o Bev fora de casa. A área institucional cuida da relação com a Faculdade de Direito do Recife, com a FEJEPE, com a Brasil Júnior e com parceiros, além dos eventos e dos projetos sociais.</p>
+      <div class="sub-l">Na prática</div>
+      <ul><li>Relação com a FDR, professores e a UFPE</li><li>Participação no Movimento Empresa Júnior e em eventos</li><li>Parcerias com escritórios e instituições</li><li>Projetos sociais, como o Pro Bono e o Tá Com Elas</li></ul>
+      <p class="dev"><span>Você desenvolve</span>Networking, representação e articulação institucional.</p>
+    </article>
+  </div>
+</section>
+
+<section class="ch panel" id="cap5" data-tab="Serviços">
+  <header><span class="label">Capítulo V</span><h2>Nossos serviços</h2></header>
+  <p class="lede">O foco é o direito empresarial preventivo: resolver a parte jurídica de um negócio antes que ela vire problema, com preço acessível e linguagem sem juridiquês.</p>
+  <div class="cols">
+    <div class="box"><h4>Abertura e formalização de empresa</h4><p>Do tipo societário mais adequado ao CNPJ em mãos, passando pelo contrato social e pelo registro na Junta Comercial.</p></div>
+    <div class="box"><h4>Elaboração e revisão de contratos</h4><p>Contratos com cláusulas claras, penalidades bem definidas e linguagem que o cliente entende.</p></div>
+    <div class="box"><h4>Registro de marca</h4><p>Pesquisa de viabilidade e acompanhamento do processo no INPI, do depósito ao certificado.</p></div>
+    <div class="box"><h4>Adequação à LGPD</h4><p>Política de privacidade, termos de uso e diagnóstico de como o negócio trata dados pessoais.</p></div>
+    <div class="box"><h4>Consultoria jurídica</h4><p>Orientação para decisões societárias, contratuais e de negócio, sem juridiquês.</p></div>
+    <div class="box"><h4>Acordo de sócios</h4><p>Regras claras entre os sócios sobre participação, decisões, saída e divisão de resultados.</p></div>
+    <div class="box"><h4>Estatutos e regimentos</h4><p>Elaboração e revisão de estatutos, regimentos internos e atas de posse e eleição.</p></div>
+    <div class="box"><h4>Notificações extrajudiciais</h4><p>Comunicações formais para resolver conflitos antes que eles cheguem à Justiça.</p></div>
+  </div>
+</section>
+
+<section class="ch panel" id="quiz" data-tab="Fato ou fake">
+  <header><span class="label">Capítulo VI</span><h2>Fato ou fake do Bev</h2></header>
+  <p class="lede">Marque <strong>Fato</strong> ou <strong>Fake</strong> em cada afirmação. Quando terminar, confira as respostas.</p>
+  <div class="quiz" id="quizbox"></div>
+</section>
+
+<section class="more panel" id="contato" data-tab="Contato">
+  <div>
+    <h2>Quer saber mais?</h2>
+    <p>Conheça os serviços, os cases e a equipe do Bev no site oficial, acompanhe os bastidores no Instagram ou fale com a gente.</p>
+  </div>
+  <div class="links">
+    <a class="cta" href="https://escritoriobevilaqua.com" target="_blank" rel="noopener">escritoriobevilaqua.com →</a>
+    <a class="cta alt" href="https://www.instagram.com/bastidoresbev/" target="_blank" rel="noopener">Instagram @bastidoresbev →</a>
+    <p class="phone"><span>Contato</span>+55 81 99586-4330</p>
+  </div>
+</section>
+
+<nav class="pager" id="pager" aria-label="Navegação entre capítulos"></nav>
+
+<footer>Material produzido sobre o Escritório Bevilaqua · Empresa Júnior da Faculdade de Direito do Recife (UFPE)</footer>
+</main>
+
+<script>
+const ITEMS = [
+ ["Preciso já ter estagiado para entrar no Bev.", false,
+  "Ninguém precisa de experiência anterior. O Bev é justamente o lugar para viver a prática jurídica pela primeira vez."],
+ ["O nome Bevilaqua homenageia um jurista que estudou na Faculdade de Direito do Recife.", true,
+  "Clóvis Beviláqua se formou na FDR e escreveu o projeto do Código Civil de 1916."],
+ ["O lucro dos projetos é dividido entre os membros do Bev.", false,
+  "A EJ não tem fins lucrativos e os membros são voluntários. O dinheiro dos projetos é reinvestido no próprio Bev."],
+ ["Os projetos do Bev são feitos sem nenhuma supervisão.", false,
+  "Os estudantes executam os projetos com orientação de professores da FDR, o que garante a qualidade das entregas."],
+ ["Existe uma lei federal só sobre empresas juniores.", true,
+  "É a Lei nº 13.267/2016, que define o que é uma EJ e como ela deve funcionar."],
+ ["O Bev faz parte da FEJEPE e da Brasil Júnior.", true,
+  "O Bev é federado pela FEJEPE desde 2017 e, por meio dela, integra a rede da Brasil Júnior."],
+ ["O Bev atende apenas grandes empresas.", false,
+  "A maior parte dos clientes são empreendedores e pequenos negócios, que encontram no Bev um serviço jurídico preventivo com preço acessível."],
+ ["Mesmo sem cargo de liderança, dá para desenvolver liderança no Bev.", true,
+  "Conduzir um projeto, uma reunião com cliente ou uma capacitação já é liderar."],
+ ["Só aproveita o Bev quem quer seguir carreira em direito empresarial.", false,
+  "Negociação, gestão, comunicação e trabalho em equipe servem para qualquer carreira jurídica, da advocacia aos concursos."],
+ ["Um dos valores do Bev é “Nem mandou e eu já fiz”.", true,
+  "Ele reconhece proatividade, autonomia e a capacidade de antecipar o que o time precisa."]
+];
+
+const box = document.getElementById("quizbox");
+const picks = new Array(ITEMS.length).fill(null);
+let checked = false;
+
+function render(){
+  box.innerHTML = "";
+  ITEMS.forEach(([text], i) => {
+    const q = document.createElement("div");
+    q.className = "q";
+    q.innerHTML = `<div class="qt"><span class="qn">${String(i+1).padStart(2,"0")}</span><p>${text}</p></div>
+      <div class="choices" role="group" aria-label="Afirmação ${i+1}">
+        <button type="button" id="q${i}-v" data-v="1">Fato</button>
+        <button type="button" id="q${i}-m" data-v="0">Fake</button>
+      </div>`;
+    q.querySelectorAll("button").forEach(b => {
+      b.setAttribute("aria-pressed", picks[i] === (b.dataset.v === "1") ? "true" : "false");
+      b.disabled = checked;
+      b.addEventListener("click", () => { picks[i] = b.dataset.v === "1"; const id = b.id; render(); document.getElementById(id)?.focus({preventScroll:true}); });
+    });
+    if (checked){
+      const right = picks[i] === ITEMS[i][1];
+      const a = document.createElement("div");
+      a.className = "ans " + (right ? "ok" : "bad");
+      const truth = ITEMS[i][1] ? "Fato" : "Fake";
+      const head = picks[i] === null ? `Sem resposta · é ${truth}` : (right ? `Acertou · é ${truth}` : `Errou · é ${truth}`);
+      a.innerHTML = `<strong>${head}</strong>${ITEMS[i][2]}`;
+      q.appendChild(a);
+    }
+    box.appendChild(q);
+  });
+
+  const done = picks.filter(p => p !== null).length;
+  const bar = document.createElement("div");
+  bar.className = "bar";
+  if (!checked){
+    bar.innerHTML = `<button type="button" class="main" id="check">Conferir respostas</button>
+      <span class="status">${done} de ${ITEMS.length} respondidas</span>`;
+    bar.querySelector("#check").addEventListener("click", () => { checked = true; render(); box.scrollIntoView({block:"start"}); });
+  } else {
+    const score = picks.filter((p,i) => p === ITEMS[i][1]).length;
+    const msg = score === ITEMS.length ? "Gabaritou. Você já é do Bev." : score >= ITEMS.length * .75 ? "Muito bem, conhece o Bev de perto." : score >= ITEMS.length / 2 ? "Bom começo. Vale dar mais uma olhada no ebook." : "Vale reler o ebook com calma.";
+    bar.innerHTML = `<span class="score">${score} / ${ITEMS.length}</span><span class="status">${msg}</span>
+      <button type="button" class="ghost" id="redo">Refazer</button>`;
+    bar.querySelector("#redo").addEventListener("click", () => { checked = false; picks.fill(null); render(); });
+  }
+  box.appendChild(bar);
+}
+render();
+
+/* Navegação por abas */
+const panels = [...document.querySelectorAll(".panel")];
+const strip = document.getElementById("tabs");
+const prog = document.getElementById("prog");
+const pager = document.getElementById("pager");
+const book = document.querySelector(".book");
+const name = i => panels[i].dataset.tab;
+let cur = -1;
+
+const tabs = panels.map((p, i) => {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.id = "tab-" + p.id;
+  b.textContent = name(i);
+  b.setAttribute("role", "tab");
+  b.setAttribute("aria-controls", p.id);
+  b.addEventListener("click", () => show(i));
+  p.setAttribute("role", "tabpanel");
+  p.setAttribute("aria-labelledby", b.id);
+  p.tabIndex = -1;
+  strip.appendChild(b);
+  return b;
+});
+
+function show(i, opts = {}){
+  i = Math.max(0, Math.min(panels.length - 1, i));
+  if (i === cur) return;
+  const dir = i > cur ? "fwd" : "back";
+  panels.forEach((p, k) => { p.hidden = k !== i; p.classList.remove("fwd", "back"); });
+  if (cur !== -1) panels[i].classList.add(dir);
+  tabs.forEach((t, k) => { t.setAttribute("aria-selected", k === i ? "true" : "false"); t.tabIndex = k === i ? 0 : -1; });
+  cur = i;
+  prog.style.width = ((i + 1) / panels.length * 100) + "%";
+  const t = tabs[i];
+  strip.scrollTo({ left: t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2, behavior: opts.init ? "auto" : "smooth" });
+  renderPager();
+  if (!opts.init) { try { history.replaceState(null, "", "#" + panels[i].id); } catch (e) {} }
+  if (!opts.init) window.scrollTo(0, 0);
+  if (opts.focusTab) t.focus();
+}
+
+function renderPager(){
+  const last = cur === panels.length - 1;
+  pager.innerHTML = `<button type="button" class="ghost" data-go="-1"${cur === 0 ? " disabled" : ""}>← Anterior</button>
+    <span class="pos">${cur + 1} de ${panels.length}</span>
+    <button type="button" class="main" data-go="1">${last ? "Voltar ao início" : "Próximo: " + name(cur + 1) + " →"}</button>`;
+  pager.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    const go = +b.dataset.go;
+    show(go > 0 && last ? 0 : cur + go);
+  }));
+}
+
+// Setas do teclado: nas abas movem o foco; fora delas, passam de capítulo
+document.addEventListener("keydown", e => {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight" || e.altKey || e.ctrlKey || e.metaKey) return;
+  const step = e.key === "ArrowRight" ? 1 : -1;
+  if (e.target.closest(".tabs")) { e.preventDefault(); show((cur + step + panels.length) % panels.length, { focusTab: true }); return; }
+  if (e.target.closest("button, a, input, textarea, select")) return;
+  show(cur + step);
+});
+
+// Deslizar no celular
+let sx = null, sy = 0;
+book.addEventListener("touchstart", e => {
+  if (e.touches.length !== 1 || e.target.closest(".tabs")) { sx = null; return; }
+  sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+}, { passive: true });
+book.addEventListener("touchend", e => {
+  if (sx === null) return;
+  const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+  sx = null;
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) show(cur + (dx < 0 ? 1 : -1));
+}, { passive: true });
+
+// Links internos (sumário) abrem a aba certa
+const byId = id => panels.findIndex(p => p.id === id);
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const i = byId(a.getAttribute("href").slice(1));
+  if (i < 0) return;
+  e.preventDefault();
+  show(i);
+});
+window.addEventListener("hashchange", () => { const i = byId(location.hash.slice(1)); if (i >= 0) show(i); });
+
+const start = byId(location.hash.slice(1));
+show(start < 0 ? 0 : start, { init: true });
+if (location.hash) window.addEventListener("load", () => window.scrollTo(0, 0));
+</script>
+
+</body></html>
