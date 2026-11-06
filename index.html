@@ -4,6 +4,7 @@
 <meta property="og:title" content="Ebook do Bev">
 <meta property="og:description" content="Conheça o Bevilaqua, a primeira e única empresa júnior jurídica de Pernambuco.">
 <meta name="claude:viewport-fit-sides" content="cover">
+<script>try{var t=localStorage.getItem("bev-tema");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
@@ -13,15 +14,31 @@
   --bg:#F3F3F1; --black:#111311; --on-black:#FFFFFF; --on-black-muted:#B9BDB5; --card:#FFFFFF; --soft:#F6F7F3; --ink:#161816; --muted:#5F635C;
   --line:#E2E6D6; --lime:#A9CF44; --lime-soft:#F0F7DB; --green:#4A6614;
   --hero-a:#121412; --hero-b:#2E3A1F; --on-hero:#FFFFFF; --on-hero-muted:#C9CEC4;
-  --warn:#C9971F; --warn-soft:#FFF5DC;
+  --warn:#C9971F; --warn-soft:#FFF5DC; --warn-ink:#8A6510;
+  --lime-line:#DCEBB8; --on-lime:#111311; --shadow:rgba(17,19,17,.45);
   --sans:"Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
   --radius:18px;
   color-scheme:light;
 }
+/* Modo noturno: segue o sistema, a menos que a pessoa escolha pela lua */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E100D; --black:#252D1A; --card:#171A15; --soft:#1F231C; --ink:#ECEFE6; --muted:#A3A99B;
+    --line:#2D3427; --lime-soft:#222B13; --lime-line:#3B4A1D; --green:#B9DB5E;
+    --warn-soft:#2D2410; --warn-ink:#E4B84E; --shadow:rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#0E100D; --black:#252D1A; --card:#171A15; --soft:#1F231C; --ink:#ECEFE6; --muted:#A3A99B;
+    --line:#2D3427; --lime-soft:#222B13; --lime-line:#3B4A1D; --green:#B9DB5E;
+    --warn-soft:#2D2410; --warn-ink:#E4B84E; --shadow:rgba(0,0,0,.6);
+    color-scheme:dark;
+}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0}
-.book{max-width:820px;margin:0 auto;padding-block:32px 72px;display:grid;gap:24px}
+.book{max-width:820px;margin:0 auto;padding-block:32px 104px;display:grid;gap:24px}
 a{color:var(--green);font-weight:600}
 a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 h1,h2,h3{font-family:var(--sans);font-weight:800;text-wrap:balance;line-height:1.15;margin:0;letter-spacing:-.02em}
@@ -66,7 +83,7 @@ section.ch{display:grid;gap:18px}
 .vals{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .val{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
 .val > div{display:grid;gap:4px;min-width:0}
-.val .ico{width:48px;height:48px;border-radius:14px;background:var(--lime-soft);border:1px solid #DCEBB8;display:grid;place-items:center}
+.val .ico{width:48px;height:48px;border-radius:14px;background:var(--lime-soft);border:1px solid var(--lime-line);display:grid;place-items:center}
 .val svg{width:22px;height:22px;fill:none;stroke:var(--green);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .val h4{margin:0;font-size:18px;font-weight:700;line-height:1.25;letter-spacing:-.01em}
 .val p{font-size:15px;color:var(--muted);line-height:1.55}
@@ -108,7 +125,7 @@ ul.list li::marker{color:var(--lime)}
 .ans.ok{background:var(--lime-soft);border-color:var(--lime)}
 .ans.bad{background:var(--warn-soft);border-color:var(--warn)}
 .ans strong{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:4px}
-.ans.ok strong{color:var(--green)} .ans.bad strong{color:#8A6510}
+.ans.ok strong{color:var(--green)} .ans.bad strong{color:var(--warn-ink)}
 .bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding-top:8px}
 .bar .main{font:700 15px/1 var(--sans);padding:15px 22px;border:0;border-radius:12px;background:var(--black);color:var(--lime);cursor:pointer}
 .bar .ghost{font:700 15px/1 var(--sans);padding:14px 20px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer}
@@ -120,7 +137,7 @@ ul.list li::marker{color:var(--lime)}
 .more > div{display:grid;gap:6px;min-width:0}
 .more h2{font-size:clamp(24px,4.5vw,32px)}
 .more p{color:var(--on-black-muted)}
-.more .cta{background:var(--lime);color:var(--black);text-decoration:none;font-weight:700;padding:14px 20px;border-radius:12px;word-break:break-word}
+.more .cta{background:var(--lime);color:var(--on-lime);text-decoration:none;font-weight:700;padding:14px 20px;border-radius:12px;word-break:break-word}
 .more .cta:hover{filter:brightness(1.05)}
 .more .links{display:grid;gap:10px;min-width:0}
 .more .cta.alt{background:transparent;color:var(--lime);border:1px solid var(--lime)}
@@ -129,7 +146,7 @@ ul.list li::marker{color:var(--lime)}
 footer{font-size:13px;color:var(--muted);text-align:center;padding-top:8px}
 /* Abas */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.tabbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:10;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px -16px rgba(17,19,17,.45);overflow:hidden}
+.tabbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:10;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px -16px var(--shadow);overflow:hidden}
 .tabs{position:relative;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px}
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{flex:none;font:600 14px/1 var(--sans);padding:11px 14px;border:0;border-radius:10px;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap}
@@ -154,6 +171,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   @keyframes in-r{from{opacity:0;transform:translateX(28px)}}
   @keyframes in-l{from{opacity:0;transform:translateX(-28px)}}
 }
+.theme{position:fixed;z-index:20;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:52px;height:52px;border-radius:50%;border:1px solid var(--lime);background:var(--black);color:var(--lime);
+  display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px var(--shadow)}
+.theme:hover{filter:brightness(1.15)}
+.theme svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme .sun{display:none}
+.theme[aria-pressed="true"] .sun{display:block}
+.theme[aria-pressed="true"] .moon{display:none}
 @media (max-width:480px){
   body{font-size:16px}
   .pager .pos{order:-1;width:100%;text-align:center}
@@ -353,6 +378,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 <nav class="pager" id="pager" aria-label="Navegação entre capítulos"></nav>
 
+<button type="button" class="theme" id="theme" aria-pressed="false" aria-label="Ativar modo noturno" title="Ativar modo noturno">
+  <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+  <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+</button>
+
 <footer>Material produzido sobre o Escritório Bevilaqua · Empresa Júnior da Faculdade de Direito do Recife (UFPE)</footer>
 </main>
 
@@ -514,6 +544,26 @@ document.addEventListener("click", e => {
   show(i);
 });
 window.addEventListener("hashchange", () => { const i = byId(location.hash.slice(1)); if (i >= 0) show(i); });
+
+// Modo claro / noturno
+const themeBtn = document.getElementById("theme");
+const sysDark = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => (document.documentElement.dataset.theme || (sysDark.matches ? "dark" : "light")) === "dark";
+function paintThemeBtn(){
+  const dark = isDark();
+  const label = dark ? "Ativar modo claro" : "Ativar modo noturno";
+  themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+  themeBtn.setAttribute("aria-label", label);
+  themeBtn.title = label;
+}
+themeBtn.addEventListener("click", () => {
+  const next = isDark() ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("bev-tema", next); } catch (e) {}
+  paintThemeBtn();
+});
+sysDark.addEventListener?.("change", paintThemeBtn);
+paintThemeBtn();
 
 const start = byId(location.hash.slice(1));
 show(start < 0 ? 0 : start, { init: true });
