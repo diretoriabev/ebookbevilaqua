@@ -171,14 +171,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   @keyframes in-r{from{opacity:0;transform:translateX(28px)}}
   @keyframes in-l{from{opacity:0;transform:translateX(-28px)}}
 }
-.theme{position:fixed;z-index:20;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+.theme{position:fixed;z-index:20;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
   width:52px;height:52px;border-radius:50%;border:1px solid var(--lime);background:var(--black);color:var(--lime);
   display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px var(--shadow)}
 .theme:hover{filter:brightness(1.15)}
 .theme svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.theme .sun{display:none}
-.theme[aria-pressed="true"] .sun{display:block}
-.theme[aria-pressed="true"] .moon{display:none}
+/* O ícone mostra o modo atual: sol no claro, lua no noturno */
+.theme .moon{display:none}
+.theme[aria-pressed="true"] .moon{display:block}
+.theme[aria-pressed="true"] .sun{display:none}
 @media (max-width:480px){
   body{font-size:16px}
   .pager .pos{order:-1;width:100%;text-align:center}
